@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+il<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -468,106 +468,45 @@
     </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"></script>
   <script>
-    let a = document.getElementById("pair");
-    let b = document.getElementById("submit");
-    let c = document.getElementById("number");
-    let box = document.getElementById("box");
-    let waitingMessage = document.getElementById("waiting-message");
+      const pairContainer = document.getElementById("pair");
+  const submitBtn = document.getElementById("submit");
+  const numberInput = document.getElementById("number");
+  const waitingMsg = document.getElementById("waiting-message");
 
-    // Create background particles
-    function createParticles() {
-      const particlesContainer = document.getElementById('particles');
-      const particleCount = 30;
-      
-      for (let i = 0; i < particleCount; i++) {
-        const particle = document.createElement('div');
-        particle.classList.add('particle');
-        
-        const size = Math.random() * 10 + 2;
-        const colors = [
-          'rgba(138, 43, 226, 0.3)', 
-          'rgba(0, 247, 255, 0.3)', 
-          'rgba(255, 42, 109, 0.3)'
-        ];
-        
-                particle.style.width = `${size}px`;
-        particle.style.height = `${size}px`;
-        particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-        particle.style.left = `${Math.random() * 100}%`;
-        particle.style.animationDuration = `${Math.random() * 20 + 10}s`;
-        particle.style.animationDelay = `${Math.random() * 5}s`;
-        
-        particlesContainer.appendChild(particle);
-      }
-    }
-    
-    createParticles();
+  async function copyCode() {
+    const codeElem = document.getElementById("copy");
+    const codeText = codeElem.innerText.replace('CODE: ', '');
+    await navigator.clipboard.writeText();
+    codeElem.innerText = "COPIED ✅";
+    codeElem.style.color = "#ffff00";
+    setTimeout(() => {
+      codeElem.innerText = "CODE: " + codeText;
+      codeElem.style.color = "#00ff99";
+    }, 1500);
+  }
 
-    async function Copy() {
-      let text = document.getElementById("copy-value").innerText;
-      let codeDisplay = document.getElementById("code-display");
-      await navigator.clipboard.writeText(text);
-      
-      codeDisplay.innerHTML = '<i class="fas fa-check" style="color:#00ff00; margin-right:8px;"></i> COPIED!';
-      codeDisplay.style.background = 'rgba(0, 255, 0, 0.1)';
-      codeDisplay.style.border = '1px solid rgba(0, 255, 0, 0.3)';
-      
-      setTimeout(() => {
-        codeDisplay.innerHTML = `
-          <i class="fas fa-copy" style="color:var(--secondary);"></i>
-          <span class="code-text">CODE:</span>
-          <span class="code-value" id="copy-value">${text}</span>
-        `;
-        codeDisplay.style.background = 'rgba(0, 0, 0, 0.3)';
-        codeDisplay.style.border = '1px solid var(--glass-border)';
-      }, 2000);
+  submitBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
+    const number = numberInput.value.replace(/[^0-9]/g, '');
+    if(!number || number.length < 11) {
+      waitingMsg.style.display = "block";
+      waitingMsg.innerText = "Invalid number format!";
+      return;
     }
 
-    b.addEventListener("click", async (e) => {
-      e.preventDefault();
-      if (!c.value) {
-        a.innerHTML = '<div style="color:var(--accent);font-weight:500;background:rgba(255,42,109,0.1);padding:10px;border-radius:8px;border:1px solid rgba(255,42,109,0.3)"><i class="fas fa-exclamation-circle"></i> Enter your WhatsApp number with country code.</div>';
-      } else if (c.value.replace(/[^0-9]/g, "").length < 11) {
-        a.innerHTML = '<div style="color:var(--accent);font-weight:500;background:rgba(255,42,109,0.1);padding:10px;border-radius:8px;border:1px solid rgba(255,42,109,0.3)"><i class="fas fa-times"></i> Invalid number format</div>';
-      } else {
-        const bc = c.value.replace(/[^0-9]/g, "");
-        let bb = "";
-        let bbc = "";
-        const cc = bc.split('');
-        cc.map(a => {
-          bbc += a;
-          if (bbc.length == 3) {
-            bb += " " + a;
-          } else if (bbc.length == 8) {
-            bb += " " + a;
-          } else {
-            bb += a;
-          }
-        });
-        c.type = "text";
-        c.value = "+" + bb;
-        c.style.color = "white";
-        waitingMessage.style.display = "block";
-        a.innerHTML = '';
-        
-        try {
-          let { data } = await axios(`/code?number=${bc}`);
-          let code = data.code || "Service Unavailable";
-          waitingMessage.style.display = "none";
-          
-          a.innerHTML = `
-            <div class="code-display pulse" id="code-display" onclick="Copy()">
-              <i class="fas fa-copy" style="color:var(--secondary);"></i>
-              <span class="code-text">CODE:</span>
-              <span class="code-value" id="copy-value">${code}</span>
-            </div>
-          `;
-        } catch (error) {
-          waitingMessage.style.display = "none";
-          a.innerHTML = '<div style="color:var(--accent);font-weight:500;background:rgba(255,42,109,0.1);padding:10px;border-radius:8px;border:1px solid rgba(255,42,109,0.3)"><i class="fas fa-exclamation-triangle"></i> Service Unavailable</div>';
-        }
-      }
-    });
+    waitingMsg.style.display = "block";
+    waitingMsg.innerText = "Generating code, please wait...";
+
+    try {
+      const { data } = await axios(`/code?number=${number}`);
+      const code = data.code || "Service Unavailable";
+
+      pairContainer.innerHTML = `<span id="copy" onclick="copyCode()">CODE: ${code}</span>`;
+      waitingMsg.style.display = "none";
+    } catch(err) {
+      waitingMsg.innerText = "Error contacting server!";
+    }
+  });
   </script>
 </body>
 </html>

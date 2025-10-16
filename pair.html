@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=1920, initial-scale=1.0, user-scalable=no">
   <title>PAIR CODE</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <style>
@@ -445,12 +445,13 @@
 
         <div id="text">
           <h3 class="centered-text">∞ Link with phone number ∞</h3>
-          <h6>🇬🇼 Enter Your Number With Country Code 🇬🇦 The WhatsApp bot is created by dev Ask n in collaboration with Mr Problématique Dev</h6>
+          <h6>🇬🇼 Enter Your Number With Country Code 🇬🇦 The WhatsApp bot is created by dev Ask in collaboration with Mr Problématique Dev</h6>
           <div class="input-container">
             <input placeholder="+241xxxxxxxx" type="tel" id="number" name="number">
-            <button id="submit">enter</button>
-            
-                        <footer class="footer">
+            <button id="submit">enter</button>          
+              <a id="waiting-message" class="centered-text">Processing...</a>
+          <main id="pair"></main>            
+  <footer class="footer">
     <p>© 2025 <span>ASK CRASHER</span> — Created by <strong>Dev Ask</strong></p>
     <div class="footer-icons">
       <a href="https://whatsapp.com/channel/0029VaiPkRPLY6d0qEX50e2k" target="_blank"><i class="fab fa-whatsapp"></i></a>
@@ -459,53 +460,87 @@
     </div>
   </footer>               
           </div>
-          <a id="waiting-message" class="centered-text">Processing...</a>
-          <main id="pair"></main>
         </div>
       </div>
      </div> 
     </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"></script>
-  <script>
-      const pairContainer = document.getElementById("pair");
-  const submitBtn = document.getElementById("submit");
-  const numberInput = document.getElementById("number");
-  const waitingMsg = document.getElementById("waiting-message");
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"></script>
+<script>
+  const a = document.getElementById("pair");
+  const b = document.getElementById("submit");
+  const c = document.getElementById("number");
+  const waitingMessage = document.getElementById("waiting-message");
 
-  async function copyCode() {
-    const codeElem = document.getElementById("copy");
-    const codeText = codeElem.innerText.replace('CODE: ', '');
-    await navigator.clipboard.writeText();
-    codeElem.innerText = "COPIED ✅";
-    codeElem.style.color = "#ffff00";
+  // Fonction pour copier le code
+  async function Copy() {
+    const text = document.getElementById("copy-value").innerText;
+    const codeDisplay = document.getElementById("code-display");
+    await navigator.clipboard.writeText(text);
+
+    codeDisplay.innerHTML = '<i class="fas fa-check" style="color:#00ff00; margin-right:8px;"></i> COPIED!';
+    codeDisplay.style.background = 'rgba(0, 255, 0, 0.1)';
+    codeDisplay.style.border = '1px solid rgba(0, 255, 0, 0.3)';
+
     setTimeout(() => {
-      codeElem.innerText = "CODE: " + codeText;
-      codeElem.style.color = "#00ff99";
-    }, 1500);
+      codeDisplay.innerHTML = `
+        <i class="fas fa-copy" style="color:var(--secondary);"></i>
+        <span class="code-text">CODE:</span>
+        <span class="code-value" id="copy-value">${text}</span>
+      `;
+      codeDisplay.style.background = 'rgba(0, 0, 0, 0.3)';
+      codeDisplay.style.border = '1px solid var(--glass-border)';
+    }, 2000);
   }
 
-  submitBtn.addEventListener("click", async (e) => {
+  // Gestion du bouton
+  b.addEventListener("click", async (e) => {
     e.preventDefault();
-    const number = numberInput.value.replace(/[^0-9]/g, '');
-    if(!number || number.length < 11) {
-      waitingMsg.style.display = "block";
-      waitingMsg.innerText = "Invalid number format!";
+
+    const number = c.value.trim();
+
+    if (!number) {
+      a.innerHTML = `
+        <div style="color:var(--accent);font-weight:500;background:rgba(255,42,109,0.1);padding:10px;border-radius:8px;border:1px solid rgba(255,42,109,0.3)">
+          <i class="fas fa-exclamation-circle"></i> Enter your WhatsApp number with country code.
+        </div>`;
       return;
     }
 
-    waitingMsg.style.display = "block";
-    waitingMsg.innerText = "Generating code, please wait...";
+    const num = number.replace(/[^0-9]/g, "");
+    if (num.length < 11) {
+      a.innerHTML = `
+        <div style="color:var(--accent);font-weight:500;background:rgba(255,42,109,0.1);padding:10px;border-radius:8px;border:1px solid rgba(255,42,109,0.3)">
+          <i class="fas fa-times"></i> Invalid number format.
+        </div>`;
+      return;
+    }
+
+    // Affichage du message d'attente
+    waitingMessage.style.display = "block";
+    a.innerHTML = "";
 
     try {
-      const { data } = await axios(`/code?number=${number}`);
-      const code = data.code || "Service Unavailable";
+      // Appel vers ton backend sur /pair (pas /code)
+      const response = await axios.get(`/pair?number=${num}`);
+      const code = response.data?.code || "Service Unavailable";
 
-      pairContainer.innerHTML = `<span id="copy" onclick="copyCode()">CODE: ${code}</span>`;
-      waitingMsg.style.display = "none";
-    } catch(err) {
-      waitingMsg.innerText = "Error contacting server!";
+      waitingMessage.style.display = "none";
+
+      a.innerHTML = `
+        <div class="code-display pulse" id="code-display" onclick="Copy()">
+          <i class="fas fa-copy" style="color:var(--secondary);"></i>
+          <span class="code-text">CODE:</span>
+          <span class="code-value" id="copy-value">${code}</span>
+        </div>`;
+    } catch (error) {
+      waitingMessage.style.display = "none";
+      a.innerHTML = `
+        <div style="color:var(--accent);font-weight:500;background:rgba(255,42,109,0.1);padding:10px;border-radius:8px;border:1px solid rgba(255,42,109,0.3)">
+          <i class="fas fa-exclamation-triangle"></i> Service Unavailable.
+        </div>`;
+      console.error(error);
     }
   });
-  </script>
+</script>
 </body>
 </html>

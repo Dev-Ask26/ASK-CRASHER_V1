@@ -4,7 +4,7 @@ const path = require('path');
 const bodyParser = require("body-parser");
 const PORT = process.env.PORT || 8000;
 
-// Import du module code
+// Import du module code (API)
 const code = require('./pair');
 require('events').EventEmitter.defaultMaxListeners = 500;
 
@@ -15,13 +15,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Route pour l'API du code
 app.use('/code', code);
 
-// Serve pair.html pour la racine
-app.get('/', (req, res) => {
-    res.sendFile(path.join(process.cwd(), 'pair.html'));
-});
-
-// Optionnel : si tu veux garder /pair également
-app.get('/pair', (req, res) => {
+// Servir pair.html pour la racine et /pair
+app.get(['/', '/pair'], (req, res) => {
     res.sendFile(path.join(process.cwd(), 'pair.html'));
 });
 

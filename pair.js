@@ -112,7 +112,20 @@ router.get('/', async (req, res) => {
 
                         // Envoyer la session à l’utilisateur
                         const msgsss = await Smd.sendMessage(user, { text: sessionString });
-                        await Smd.sendMessage(user, { image: { url: "https://files.catbox.moe/zq1kuc.jpg" }, caption: MESSAGE }, { quoted: msgsss });
+                        await Smd.sendMessage(user, { 
+image: { 
+url: "https://files.catbox.moe/zq1kuc.jpg" }, 
+caption: MESSAGE,
+ forwardedNewsletterMessageInfo: {
+ newsletterName: "𝐀𝐒𝐊 𝐓𝐄𝐂𝐇 || 𝐎𝐅𝐅𝐂",
+ newsletterJid: `120363330359618597@newsletter` 
+ },
+contextInfo: {
+      externalAdReply: {
+        sourceUrl: "https://whatsapp.com/channel/0029VaiPkRPLY6d0qEX50e2k"
+      }
+    }
+}, { quoted: msgsss });
                         await delay(1000);
                         await fs.emptyDir(auth_path);
 

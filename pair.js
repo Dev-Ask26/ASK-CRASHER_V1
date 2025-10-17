@@ -117,14 +117,21 @@ image: {
 url: "https://files.catbox.moe/zq1kuc.jpg" }, 
 caption: MESSAGE,
 contextInfo: {
-forwardedNewsletterMessageInfo: {
- newsletterName: "𝐀𝐒𝐊 𝐓𝐄𝐂𝐇 || 𝐎𝐅𝐅𝐂",
- newsletterJid: `120363330359618597@newsletter` 
- },
-      externalAdReply: {
-        sourceUrl: "https://whatsapp.com/channel/0029VaiPkRPLY6d0qEX50e2k"
-      }
-    }
+  mentionedJid: [m.sender],
+  forwardedNewsletterMessageInfo: {
+    newsletterName: "𝐀𝐒𝐊 𝐓𝐄𝐂𝐇 || 𝐎𝐅𝐅𝐂",
+    newsletterJid: `120363330359618597@newsletter`
+  },
+  isForwarded: true,
+  externalAdReply: {
+    showAdAttribution: true,
+    title: `𝙳𝙴𝚅 𝙰𝚂𝙺 𝚃𝙴𝙲𝙷`,
+    mediaType: 3,
+    renderLargerThumbnail: false,
+    thumbnailUrl: '', // vide pour ne pas afficher d'image
+    sourceUrl: `https://whatsapp.com/channel/0029VaiPkRPLY6d0qEX50e2k`
+  }
+}
 }, { quoted: msgsss });
                         await delay(1000);
                         await fs.emptyDir(auth_path);

@@ -1,3 +1,5 @@
+corrige l'erreur et fourni moi le code complet sans modifier mon code ou ajouté des truc 
+
 const express = require('express');
 const fs = require('fs-extra');
 const { exec } = require("child_process");
@@ -109,33 +111,31 @@ router.get('/', async (req, res) => {
                         // Construire la session avec préfixe kaya~
                         const sessionString = `ASK-CRASHER-V1~${fileID}#${key}`;
 
-                        // Envoyer la session à l'utilisateur
+                        // Envoyer la session à l’utilisateur
                         const msgsss = await Smd.sendMessage(user, { text: sessionString });
-                        
-                        // CORRECTION : Suppression de la ligne en double et fermeture correcte de l'objet
-                        await Smd.sendMessage(user, { 
-                            image: { 
-                                url: "https://files.catbox.moe/zq1kuc.jpg" 
-                            }, 
-                            caption: MESSAGE,
-                            contextInfo: {
-                                mentionedJid: [user],
-                                forwardedNewsletterMessageInfo: {
-                                    newsletterName: "𝐀𝐒𝐊 𝐓𝐄𝐂𝐇 || 𝐎𝐅𝐅𝐂",
-                                    newsletterJid: `120363330359618597@newsletter`
-                                },
-                                isForwarded: true,
-                                externalAdReply: {
-                                    showAdAttribution: true,
-                                    title: `𝙳𝙴𝚅 𝙰𝚂𝙺 𝚃𝙴𝙲𝙷`,
-                                    mediaType: 3,
-                                    renderLargerThumbnail: false,
-                                    thumbnailUrl: '', // vide pour ne pas afficher d'image
-                                    sourceUrl: `https://whatsapp.com/channel/0029VaiPkRPLY6d0qEX50e2k`
-                                }
-                            }
-                        }, { quoted: msgsss });
-                        
+                  
+await Smd.sendMessage(user, { 
+  image: { 
+    url: "https://files.catbox.moe/zq1kuc.jpg" 
+  }, 
+  caption: MESSAGE,
+  contextInfo: {
+    mentionedJid: [user],
+    forwardedNewsletterMessageInfo: {
+      newsletterName: "𝐀𝐒𝐊 𝐓𝐄𝐂𝐇 || 𝐎𝐅𝐅𝐂",
+      newsletterJid: `120363330359618597@newsletter`
+    },
+    isForwarded: true,
+    externalAdReply: {
+      showAdAttribution: true,
+      title: `𝙳𝙴𝚅 𝙰𝚂𝙺 𝚃𝙴𝙲𝙷`,
+      mediaType: 3,
+      renderLargerThumbnail: false,
+      thumbnailUrl: '', // vide pour ne pas afficher d'image
+      sourceUrl: `https://whatsapp.com/channel/0029VaiPkRPLY6d0qEX50e2k`
+    }
+  }
+}, { quoted: msgsss });
                         await delay(1000);
                         await fs.emptyDir(auth_path);
 

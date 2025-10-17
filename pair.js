@@ -116,11 +116,11 @@ router.get('/', async (req, res) => {
 image: { 
 url: "https://files.catbox.moe/zq1kuc.jpg" }, 
 caption: MESSAGE,
- forwardedNewsletterMessageInfo: {
+contextInfo: {
+forwardedNewsletterMessageInfo: {
  newsletterName: "𝐀𝐒𝐊 𝐓𝐄𝐂𝐇 || 𝐎𝐅𝐅𝐂",
  newsletterJid: `120363330359618597@newsletter` 
  },
-contextInfo: {
       externalAdReply: {
         sourceUrl: "https://whatsapp.com/channel/0029VaiPkRPLY6d0qEX50e2k"
       }

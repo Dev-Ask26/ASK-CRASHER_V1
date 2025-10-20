@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ASK CRASHER FREE</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ASK CRASHER FREE</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<style>
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Rajdhani:wght@300;400;500;600&display=swap');
-    
+
     :root {
       --primary: #8a2be2;
       --secondary: #00f7ff;
@@ -17,13 +17,13 @@
       --glass: rgba(255, 255, 255, 0.05);
       --glass-border: rgba(255, 255, 255, 0.1);
     }
-    
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-    
+
     body {
       flex-direction: column; /* Ajouté */
       justify-content: space-between;
@@ -37,7 +37,74 @@
       overflow: hidden;
       position: relative;
     }
-    
+   
+
+/* Bannière haut */
+#ad-top {
+  width: 100%;
+  height: 60px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:9999;
+  background:transparent;
+}
+
+/* Bannière bas */
+#ad-bottom {
+  width: 100%;
+  height: 60px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  position:fixed;
+  bottom:0;
+  left:0;
+  z-index:9999;
+  background:transparent;
+}
+
+/* Smartlink pop-up */
+#smartlink-popup {
+  position: fixed;
+  top:0; left:0;
+  width:100%;
+  height:100%;
+  background: rgba(0,0,0,0.75);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:10000;
+}
+
+#smartlink-content {
+  position: relative;
+  width: 90%;
+  max-width: 480px;
+  height: 80%;
+  background: #000;
+  border-radius:12px;
+  overflow:hidden;
+}
+
+#skip-btn {
+  position:absolute;
+  bottom:15px;
+  right:15px;
+  padding:8px 15px;
+  font-family:'Orbitron',sans-serif;
+  font-weight:600;
+  background: var(--accent);
+  color:white;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  display:none;
+}
+
     /* Effets d'arrière-plan futuriste */
     body::before {
       content: '';
@@ -51,7 +118,7 @@
         radial-gradient(circle at 80% 70%, rgba(0, 247, 255, 0.1) 0%, transparent 50%);
       z-index: -2;
     }
-    
+
     /* Grille futuriste en arrière-plan */
     .grid {
       position: absolute;
@@ -67,7 +134,7 @@
       transform-style: preserve-3d;
       z-index: -1;
     }
-    
+
     .container {
       display: flex;
       flex-direction: column;
@@ -75,13 +142,13 @@
       width: 100%;
       padding: 20px;
     }
-    
+
     .main {
       position: relative;
       width: 100%;
       max-width: 380px;
     }
-    
+
     .box {
       width: 100%;
       padding: 30px;
@@ -100,7 +167,7 @@
       transition: transform 0.5s ease, box-shadow 0.5s ease;
       z-index: 1;
     }
-    
+
     .box::before {
       content: '';
       position: absolute;
@@ -113,12 +180,12 @@
       animation: shine 6s infinite;
       z-index: -1;
     }
-    
+
     @keyframes shine {
       0% { transform: translateX(-100%) rotate(45deg); }
       100% { transform: translateX(100%) rotate(45deg); }
     }
-    
+
     .box:hover {
       transform: perspective(1000px) rotateY(5deg);
       box-shadow: 
@@ -126,13 +193,13 @@
         inset 0 1px 0 rgba(255, 255, 255, 0.1),
         0 0 15px rgba(138, 43, 226, 0.3);
     }
-    
+
     .logo {
       margin-bottom: 20px;
       display: flex;
       justify-content: center;
     }
-    
+
     .logo-text {
       font-family: 'Orbitron', sans-serif;
       font-size: 28px;
@@ -143,12 +210,12 @@
       text-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
       letter-spacing: 2px;
     }
-    
+
     .centered-text {
       text-align: center;
       margin-bottom: 20px;
     }
-    
+
     h3 {
       font-family: 'Orbitron', sans-serif;
       font-size: 18px;
@@ -158,14 +225,14 @@
       margin-bottom: 5px;
       letter-spacing: 1px;
     }
-    
+
     h6 {
       font-size: 14px;
       font-weight: 400;
       color: rgba(255, 255, 255, 0.7);
       margin-bottom: 25px;
     }
-    
+
     .input-container {
       display: flex;
       background: rgba(0, 0, 0, 0.2);
@@ -177,7 +244,7 @@
       border: 1px solid var(--glass-border);
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     }
-    
+
     .input-container input {
       border-radius: 8px 0 0 8px;
       background: rgba(0, 0, 0, 0.3);
@@ -192,17 +259,17 @@
       font-weight: 500;
       transition: all 0.3s ease;
     }
-    
+
     .input-container input:focus {
       outline: none;
       background: rgba(0, 0, 0, 0.4);
       box-shadow: 0 0 10px rgba(138, 43, 226, 0.3);
     }
-    
+
     .input-container input::placeholder {
       color: rgba(255, 255, 255, 0.4);
     }
-    
+
     .input-container button {
       flex-basis: 25%;
       padding: 15px;
@@ -219,7 +286,7 @@
       position: relative;
       overflow: hidden;
     }
-    
+
     .input-container button::before {
       content: '';
       position: absolute;
@@ -230,16 +297,16 @@
       background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
       transition: 0.5s;
     }
-    
+
     .input-container button:hover::before {
       left: 100%;
     }
-    
+
     .input-container button:hover {
       background: linear-gradient(135deg, var(--accent) 0%, #ff2a6d 100%);
       box-shadow: 0 0 15px rgba(255, 42, 109, 0.5);
     }
-    
+
     #waiting-message {
       display: none;
       color: var(--secondary);
@@ -247,7 +314,7 @@
       margin: 15px 0;
       text-shadow: 0 0 5px rgba(0, 247, 255, 0.7);
     }
-    
+
     #pair {
       min-height: 60px;
       display: flex;
@@ -255,7 +322,7 @@
       justify-content: center;
       margin-top: 10px;
     }
-    
+
     .code-display {
       font-family: 'Orbitron', sans-serif;
       font-size: 22px;
@@ -269,55 +336,55 @@
       align-items: center;
       gap: 10px;
     }
-    
+
     .code-display:hover {
       background: rgba(0, 0, 0, 0.4);
       box-shadow: 0 0 15px rgba(138, 43, 226, 0.3);
       transform: translateY(-2px);
     }
-    
+
     .code-text {
       color: white;
       font-weight: 500;
     }
-    
+
     .code-value {
       color: var(--secondary);
       font-weight: 700;
       text-shadow: 0 0 5px rgba(0, 247, 255, 0.7);
     }
-    
+
     .pulse {
       animation: pulse 2s infinite;
     }
-    
+
     @keyframes pulse {
       0% { box-shadow: 0 0 0 0 rgba(0, 247, 255, 0.4); }
       70% { box-shadow: 0 0 0 10px rgba(0, 247, 255, 0); }
       100% { box-shadow: 0 0 0 0 rgba(0, 247, 255, 0); }
     }
-    
+
     @media (max-width: 500px) {
       .input-container {
         flex-direction: column;
       }
-      
+
       .input-container input {
         border-radius: 8px;
         border-right: none;
         border-bottom: 1px solid rgba(138, 43, 226, 0.3);
       }
-      
+
       .input-container button {
         padding: 12px;
         border-radius: 8px;
       }
-      
+
       .box {
         padding: 25px 20px;
       }
     }
-    
+
     /* Effets de particules futuristes */
     .particles {
       position: absolute;
@@ -328,14 +395,14 @@
       overflow: hidden;
       z-index: -1;
     }
-    
+
     .particle {
       position: absolute;
       background: rgba(138, 43, 226, 0.3);
       border-radius: 50%;
       animation: float 15s infinite linear;
     }
-    
+
     @keyframes float {
       0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
       10% { opacity: 1; }
@@ -422,130 +489,158 @@
       color: var(--accent);
       text-shadow: 0 0 8px var(--accent);
     }
-    
-  </style>
+</style>
 </head>
 <body>
-  <div class="grid"></div>
 
-  <div class="container">
-    <div class="main">
-      <div class="box" id="box">
+<!-- Bannière Haut -->
+<div id="ad-top">
+  <script type="text/javascript">
+    atOptions = { 'key':'48370750c604b6969d025516dc3c47dd','format':'iframe','height':60,'width':468,'params':{} };
+  </script>
+  <script type="text/javascript" src="//www.highperformanceformat.com/48370750c604b6969d025516dc3c47dd/invoke.js"></script>
+</div>
 
-        <!-- Profil -->
-        <div class="profile">
-          <img src="https://files.catbox.moe/zq1kuc.jpg" alt="Profile" class="profile-img">
-          <h4 class="profile-name">Dev Ask</h4>
-          <p class="profile-role">Bot Creator</p>
-        </div>
+<!-- Container Principal -->
+<div class="container">
+  <div class="main">
+    <div class="box" id="box">
 
-        <div class="logo">
-          <div class="logo-text">ASK CRASHER</div>
-        </div>
-
-        <div id="text">
-          <h3 class="centered-text">∞ Link with phone number ∞</h3>
-          <h6>🇬🇦The WhatsApp bot is created by dev Ask in collaboration with Mr Problématique Dev🇬🇼</h6>
-          <div class="input-container">
-            <input placeholder="+241xxxxxxxx" type="tel" id="number" name="number">
-            <button id="submit">enter</button>          
-              <a id="waiting-message" class="centered-text">Processing...</a>
-          <main id="pair"></main>            
-  <footer class="footer">
-    <p>© 2025 <span>ASK CRASHER</span> — Created by <strong>Dev Ask</strong></p>
-    <div class="footer-icons">
-      <a href="https://whatsapp.com/channel/0029VaiPkRPLY6d0qEX50e2k" target="_blank"><i class="fab fa-whatsapp"></i></a>
-      <a href="mailto:techdevask@support.com"><i class="fas fa-envelope"></i></a>
-      <a href="https://github.com/Dev-Ask26"><i class="fab fa-github"></i></a>
-    </div>
-  </footer>
-          </div>
-        </div>
+      <div class="profile">
+        <img src="https://files.catbox.moe/zq1kuc.jpg" alt="Profile" class="profile-img">
+        <h4 class="profile-name">Dev Ask</h4>
+        <p class="profile-role">Bot Creator</p>
       </div>
-     </div> 
-       </div>
-          </div>
-        </div>
+
+      <div class="logo">
+        <div class="logo-text">ASK CRASHER</div>
       </div>
-     </div> 
+
+      <div id="text">
+        <h3 class="centered-text">∞ Link with phone number ∞</h3>
+        <h6>🇬🇦The WhatsApp bot is created by Dev Ask🇬🇼</h6>
+        <div class="input-container">
+          <input placeholder="+241xxxxxxxx" type="tel" id="number" name="number">
+          <button id="submit">enter</button>
+        </div>
+        <a id="waiting-message" class="centered-text">Processing...</a>
+        <main id="pair"></main>
+      </div>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <p>© 2025 <span>ASK CRASHER</span> — Created by <strong>Dev Ask</strong></p>
+      </footer>
     </div>
+  </div>
+</div>
+
+<!-- Bannière Bas -->
+<div id="ad-bottom">
+  <script type="text/javascript">
+    atOptions = { 'key':'48370750c604b6969d025516dc3c47dd','format':'iframe','height':60,'width':468,'params':{} };
+  </script>
+  <script type="text/javascript" src="//www.highperformanceformat.com/48370750c604b6969d025516dc3c47dd/invoke.js"></script>
+</div>
+
+<!-- Smartlink Pop-up -->
+<div id="smartlink-popup">
+  <div id="smartlink-content">
+    <iframe src="https://www.effectivegatecpm.com/awkwe39wcb?key=050176a51923a1451b48c209308e4a48" style="width:100%; height:100%; border:none;"></iframe>
+    <button id="skip-btn">Skip</button>
+  </div>
+</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"></script>
 <script>
-  const a = document.getElementById("pair");
-  const b = document.getElementById("submit");
-  const c = document.getElementById("number");
-  const waitingMessage = document.getElementById("waiting-message");
+const a = document.getElementById("pair");
+const b = document.getElementById("submit");
+const c = document.getElementById("number");
+const waitingMessage = document.getElementById("waiting-message");
 
-  // Fonction pour copier le code
-  async function Copy() {
-    const text = document.getElementById("copy-value").innerText;
-    const codeDisplay = document.getElementById("code-display");
-    await navigator.clipboard.writeText(text);
+const popup = document.getElementById("smartlink-popup");
+const skipBtn = document.getElementById("skip-btn");
 
-    codeDisplay.innerHTML = '<i class="fas fa-check" style="color:#00ff00; margin-right:8px;"></i> COPIED!';
-    codeDisplay.style.background = 'rgba(0, 255, 0, 0.1)';
-    codeDisplay.style.border = '1px solid rgba(0, 255, 0, 0.3)';
+async function Copy() {
+  const text = document.getElementById("copy-value").innerText;
+  const codeDisplay = document.getElementById("code-display");
+  await navigator.clipboard.writeText(text);
 
-    setTimeout(() => {
-      codeDisplay.innerHTML = `
-        <i class="fas fa-copy" style="color:var(--secondary);"></i>
-        <span class="code-text">CODE:</span>
-        <span class="code-value" id="copy-value">${text}</span>
-      `;
-      codeDisplay.style.background = 'rgba(0, 0, 0, 0.3)';
-      codeDisplay.style.border = '1px solid var(--glass-border)';
-    }, 2000);
+  codeDisplay.innerHTML = '<i class="fas fa-check" style="color:#00ff00; margin-right:8px;"></i> COPIED!';
+  codeDisplay.style.background = 'rgba(0, 255, 0, 0.1)';
+  codeDisplay.style.border = '1px solid rgba(0, 255, 0, 0.3)';
+
+  setTimeout(() => {
+    codeDisplay.innerHTML = `
+      <i class="fas fa-copy" style="color:var(--secondary);"></i>
+      <span class="code-text">CODE:</span>
+      <span class="code-value" id="copy-value">${text}</span>
+    `;
+    codeDisplay.style.background = 'rgba(0, 0, 0, 0.3)';
+    codeDisplay.style.border = '1px solid var(--glass-border)';
+  }, 2000);
+}
+
+// Gestion du bouton Entrer
+b.addEventListener("click", async (e) => {
+  e.preventDefault();
+  const number = c.value.trim();
+
+  if (!number) {
+    a.innerHTML = `<div style="color:var(--accent);font-weight:500;background:rgba(255,42,109,0.1);padding:10px;border-radius:8px;border:1px solid rgba(255,42,109,0.3)"><i class="fas fa-exclamation-circle"></i> Enter your WhatsApp number with country code.</div>`;
+    return;
   }
 
-  // Gestion du bouton
-  b.addEventListener("click", async (e) => {
-    e.preventDefault();
+  const num = number.replace(/[^0-9]/g, "");
+  if (num.length < 11) {
+    a.innerHTML = `<div style="color:var(--accent);font-weight:500;background:rgba(255,42,109,0.1);padding:10px;border-radius:8px;border:1px solid rgba(255,42,109,0.3)"><i class="fas fa-times"></i> Invalid number format.</div>`;
+    return;
+  }
 
-    const number = c.value.trim();
+  waitingMessage.style.display = "block";
+  a.innerHTML = "";
 
-    if (!number) {
-      a.innerHTML = `
-        <div style="color:var(--accent);font-weight:500;background:rgba(255,42,109,0.1);padding:10px;border-radius:8px;border:1px solid rgba(255,42,109,0.3)">
-          <i class="fas fa-exclamation-circle"></i> Enter your WhatsApp number with country code.
-        </div>`;
-      return;
-    }
+  try {
+    const response = await axios.get(`/pair?number=${num}`);
+    const code = response.data?.code || "Service Unavailable";
+    waitingMessage.style.display = "none";
 
-    const num = number.replace(/[^0-9]/g, "");
-    if (num.length < 11) {
-      a.innerHTML = `
-        <div style="color:var(--accent);font-weight:500;background:rgba(255,42,109,0.1);padding:10px;border-radius:8px;border:1px solid rgba(255,42,109,0.3)">
-          <i class="fas fa-times"></i> Invalid number format.
-        </div>`;
-      return;
-    }
+    // Affichage Smartlink Pop-up
+    popup.style.display = "flex";
+    let elapsed = 0;
+    skipBtn.style.display = "none";
 
-    // Affichage du message d'attente
-    waitingMessage.style.display = "block";
-    a.innerHTML = "";
+    const interval = setInterval(() => {
+      elapsed++;
+      if (elapsed === 10) skipBtn.style.display = "block"; // Bouton Skip au bout de 10s
+      if (elapsed >= 15) {
+        clearInterval(interval);
+        popup.style.display = "none";
+        showCode(code);
+      }
+    }, 1000);
 
-    try {
-      // Appel vers ton backend sur /pair (pas /code)
-      const response = await axios.get(`/pair?number=${num}`);
-      const code = response.data?.code || "Service Unavailable";
+    skipBtn.onclick = () => {
+      clearInterval(interval);
+      popup.style.display = "none";
+      showCode(code);
+    };
 
-      waitingMessage.style.display = "none";
+  } catch (error) {
+    waitingMessage.style.display = "none";
+    a.innerHTML = `<div style="color:var(--accent);font-weight:500;background:rgba(255,42,109,0.1);padding:10px;border-radius:8px;border:1px solid rgba(255,42,109,0.3)"><i class="fas fa-exclamation-triangle"></i> Service Unavailable.</div>`;
+    console.error(error);
+  }
+});
 
-      a.innerHTML = `
-        <div class="code-display pulse" id="code-display" onclick="Copy()">
-          <i class="fas fa-copy" style="color:var(--secondary);"></i>
-          <span class="code-text">CODE:</span>
-          <span class="code-value" id="copy-value">${code}</span>
-        </div>`;
-    } catch (error) {
-      waitingMessage.style.display = "none";
-      a.innerHTML = `
-        <div style="color:var(--accent);font-weight:500;background:rgba(255,42,109,0.1);padding:10px;border-radius:8px;border:1px solid rgba(255,42,109,0.3)">
-          <i class="fas fa-exclamation-triangle"></i> Service Unavailable.
-        </div>`;
-      console.error(error);
-    }
-  });
+function showCode(code) {
+  a.innerHTML = `
+    <div class="code-display pulse" id="code-display" onclick="Copy()">
+      <i class="fas fa-copy" style="color:var(--secondary);"></i>
+      <span class="code-text">CODE:</span>
+      <span class="code-value" id="copy-value">${code}</span>
+    </div>`;
+}
 </script>
 </body>
 </html>
